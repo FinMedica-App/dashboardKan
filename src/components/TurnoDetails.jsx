@@ -23,16 +23,25 @@ const TurnoDetails = ({ turno, open, onClose }) => {
           Detalles del Turno
         </Typography>
         <Typography>
-          <strong>Fecha:</strong> {turno.attributes.fecha || "No disponible"}
+          <strong>Fecha:</strong> {turno.fecha || "No disponible"}
         </Typography>
         <Typography>
-          <strong>Hora:</strong> {turno.attributes.hora || "No disponible"}
+          <strong>Hora:</strong> {turno.hora || "No disponible"}
         </Typography>
         <Typography>
-          <strong>Paciente:</strong>{" "}
-          {turno.paciente
-            ? `${turno.paciente.data.attributes.nombres} ${turno.paciente.data.attributes.apellidos}`
-            : "No disponible"}
+          <strong>Paciente:</strong> {turno.paciente || "No disponible"}
+        </Typography>
+        <Typography>
+          <strong>Médico:</strong> {turno.medico || "No disponible"}
+        </Typography>
+        <Typography>
+          <strong>Especialidad:</strong> {turno.especialidad || "No disponible"}
+        </Typography>
+        <Typography>
+          <strong>Estado:</strong> {turno.estado || "No disponible"}
+        </Typography>
+        <Typography>
+          <strong>Observaciones:</strong> {turno.observacion || "No disponible"}
         </Typography>
         <Button
           onClick={onClose}

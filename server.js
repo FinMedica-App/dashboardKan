@@ -37,7 +37,7 @@ app.get("/proxy/admision/turnos", async (req, res) => {
 });
 
 // 🔹 Proxy para obtener datos del paciente
-app.get("/proxy/persona/:id", async (req, res) => {
+app.get("/proxy/personas/:id", async (req, res) => {
   const personaId = req.params.id;
   const apiUrl = `https://finmedica.alephoo.com/api/v3/admin/personas/${personaId}`;
 
@@ -47,7 +47,7 @@ app.get("/proxy/persona/:id", async (req, res) => {
     const response = await axios.get(apiUrl, {
       headers: {
         Authorization: "Basic bW9iaWxlYXBwOnRsY181MDE5X1Jldm9sdWNpb25fLg==",
-      },
+      },  
     });
 
     console.log("✅ Proxy: Paciente encontrado");
