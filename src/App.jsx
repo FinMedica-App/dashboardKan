@@ -5,8 +5,20 @@ import KanbanBoard from "./components/KanbanBoard";
 import TurnoDetails from "./components/TurnoDetails";
 import Filters from "./components/Filters";
 import useTurnos from "./hooks/useTurnos";
+import Login from "./components/Login";
 
 const App = () => {
+  // Estado para el token de autenticación
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  
+  // Si no existe token, muestra el formulario de login
+  if (!token) {
+    return <Login onLogin={(newToken) => {
+      localStorage.setItem("token", newToken);
+      setToken(newToken);
+    }} />;
+  }
+
   const [vista, setVista] = useState("tabla");
   const [fechaSeleccionada, setFechaSeleccionada] = useState(
     new Date().toISOString().split("T")[0]
@@ -35,17 +47,17 @@ const App = () => {
 
   const filteredTurnos = useMemo(() => {
     return turnos.filter((turno) => {
-      // Filtrar por fecha: se comprueba que turno.fecha incluya la fechaSeleccionada
+      // Filtrar por fecha
       const matchesFecha = fechaSeleccionada
         ? turno.fecha && turno.fecha.includes(fechaSeleccionada)
         : true;
-        
+      
       // Filtrar por especialidad
       const matchesEspecialidad = especialidadFiltro
         ? turno.especialidad &&
           turno.especialidad.toLowerCase().includes(especialidadFiltro.toLowerCase())
         : true;
-  
+
       // Filtrar por búsqueda (paciente o médico)
       const matchesBusqueda = busqueda
         ? (turno.paciente &&
@@ -53,10 +65,10 @@ const App = () => {
           (turno.medico &&
             turno.medico.toLowerCase().includes(busqueda.toLowerCase()))
         : true;
-  
+
       return matchesFecha && matchesEspecialidad && matchesBusqueda;
     });
-  }, [turnos, fechaSeleccionada, especialidadFiltro, busqueda]);  
+  }, [turnos, fechaSeleccionada, especialidadFiltro, busqueda]);
 
   return (
     <Layout onMenuSelect={setVista}>
