@@ -10,7 +10,8 @@ import {
   ListItem, 
   ListItemText, 
   Toolbar, 
-  Typography 
+  Typography,
+  Button
 } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -21,6 +22,12 @@ const Layout = ({ children, onMenuSelect }) => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(prev => !prev);
+  };
+
+  // Función para cerrar sesión: elimina el token y recarga la página
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
   };
 
   // Menú de navegación
@@ -75,6 +82,11 @@ const Layout = ({ children, onMenuSelect }) => {
           <Typography variant="h6" noWrap component="div">
             Dashboard de Turnos
           </Typography>
+          {/* Espaciador para empujar el botón de cerrar sesión a la derecha */}
+          <Box sx={{ flexGrow: 1 }} />
+          <Button color="inherit" onClick={handleLogout}>
+            Cerrar Sesión
+          </Button>
         </Toolbar>
       </AppBar>
 

@@ -25,6 +25,14 @@ const KanbanBoard = ({ turnos, onRefresh, loading }) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   useEffect(() => {
+    const intervalId = setInterval(() => {
+      onRefresh();
+    }, 300000); 
+
+    return () => clearInterval(intervalId);
+  }, [onRefresh]);
+
+  useEffect(() => {
     const nuevoEstado = {
       "Pendiente": [],
       "No asistió": [],
