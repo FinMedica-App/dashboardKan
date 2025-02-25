@@ -33,6 +33,8 @@ const KanbanBoard = ({ turnos, onRefresh, loading }) => {
   }, [onRefresh]);
 
   useEffect(() => {
+    const hoy = new Date().toISOString().split("T")[0]; 
+  
     const nuevoEstado = {
       "Pendiente": [],
       "No asistió": [],
@@ -40,16 +42,19 @@ const KanbanBoard = ({ turnos, onRefresh, loading }) => {
       "Arribo": [],
       "Visto": [],
     };
-
-    turnos.forEach((turno) => {
-      const estado = turno.estado || "Pendiente"; 
-      if (nuevoEstado[estado]) {
-        nuevoEstado[estado].push(turno);
-      }
-    });
-
+  
+    turnos
+      .filter((turno) => turno.fecha === hoy) 
+      .forEach((turno) => {
+        const estado = turno.estado || "Pendiente";
+        if (nuevoEstado[estado]) {
+          nuevoEstado[estado].push(turno);
+        }
+      });
+  
     setTurnosPorEstado(nuevoEstado);
   }, [turnos]);
+  
 
   const handleFullScreenToggle = () => {
     setFullScreen(prev => !prev);

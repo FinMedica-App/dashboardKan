@@ -110,6 +110,7 @@ const TurnosTable = ({ turnos, onOpenDetails }) => {
               <StyledTableCell>Paciente</StyledTableCell>
               <StyledTableCell>Médico</StyledTableCell>
               <StyledTableCell>Especialidad</StyledTableCell>
+              <StyledTableCell>Estado</StyledTableCell>
               <StyledTableCell align="center">Acciones</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -133,6 +134,21 @@ const TurnosTable = ({ turnos, onOpenDetails }) => {
                       </Typography>
                     </TableCell>
                     <TableCell>{turno.especialidad || "No disponible"}</TableCell>
+                    <TableCell>
+    <Typography 
+      variant="body2" 
+      sx={{
+        fontWeight: "bold", 
+        color: turno.estado === "Realizado" ? "green" 
+          : turno.estado === "Pendiente" ? "orange" 
+          : turno.estado === "Cancelada" ? "red" 
+          : turno.estado === "No asistió" ? "red" 
+          : "gray"
+      }}
+    >
+      {turno.estado || "Desconocido"}
+    </Typography>
+  </TableCell>
                     <TableCell align="center">
                       <Button
                         variant="contained"
@@ -190,6 +206,21 @@ const TurnosTable = ({ turnos, onOpenDetails }) => {
                                   </Typography>
                                 </TableCell>
                                 <TableCell>{turno.especialidad || "No disponible"}</TableCell>
+                                <TableCell>
+    <Typography 
+      variant="body2" 
+      sx={{
+        fontWeight: "bold", 
+        color: turno.estado === "Realizado" ? "green" 
+          : turno.estado === "Pendiente" ? "orange" 
+          : turno.estado === "Cancelada" ? "red" 
+          : turno.estado === "No asistió" ? "red" 
+          : "gray"
+      }}
+    >
+      {turno.estado || "Desconocido"}
+    </Typography>
+  </TableCell>
                                 <TableCell align="center">
                                   <Button
                                     variant="contained"
