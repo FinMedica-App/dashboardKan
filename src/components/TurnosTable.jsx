@@ -43,9 +43,12 @@ const TurnosTable = ({ turnos, onOpenDetails }) => {
   // Filtrar los turnos para excluir aquellos sin paciente o con "No disponible"
   const filteredTurnos = useMemo(() => {
     return turnos.filter(
-      (turno) => turno.paciente && turno.paciente !== "No disponible"
+      (turno) => 
+        turno.paciente && 
+        turno.paciente !== "No disponible" &&
+        turno.estado !== "Desconocido" // 🔹 Excluye los turnos con estado "Desconocido"
     );
-  }, [turnos]);
+  }, [turnos]);  
 
   // Agrupar turnos por paciente
   const gruposPorPaciente = useMemo(() => {
